@@ -1,7 +1,6 @@
 import { Router } from "express";
-import requireUser from "../middleware/requireUser";
-import { login, register } from "../controllers/authcontroller";
-import requireUser from "../middleware/requireUser";
+import requireUser from "../middleware/requireUser.js";
+import { login, register } from "../controllers/authcontroller.js";
 
 
 

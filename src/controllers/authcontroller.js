@@ -1,4 +1,5 @@
-import { User } from "../models/user";
+import catchAsync from "../helpers/catchAsync.js";
+import { User } from "../models/user.js";
 import jwt from "jsonwebtoken";
 
 export const register = catchAsync(async (req, res, next) => {

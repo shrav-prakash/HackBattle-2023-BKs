@@ -22,6 +22,11 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  gender: {
+    type: String,
+    required: true,
+    enum: ["male", "female"]
+  },
   pickupRating: {
     type: Number,
     default: 0,

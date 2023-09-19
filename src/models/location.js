@@ -16,7 +16,7 @@ export const locationSchema = new Schema({
     required: true,
     validate: {
       validator: function (v) {
-        return v == "Male" || v == "Female";
+        return v.length <= 2 && (v.includes("male") || v.includes("female"));
       },
       message: (props) => `${props.value} is not a valid Gender!`,
     },
@@ -24,4 +24,4 @@ export const locationSchema = new Schema({
   },
 });
 
-export const User = mongoose.model("Location", locationSchema);
+export const Location = mongoose.model("Location", locationSchema);

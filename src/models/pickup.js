@@ -26,4 +26,4 @@ const pickupSchema = new Schema({
   },
 });
 
-export const User = mongoose.model("Pickup", pickupSchema);
+export const Pickup = mongoose.model("Pickup", pickupSchema);

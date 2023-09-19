@@ -1,6 +1,6 @@
 import catchAsync from "../helpers/catchAsync.js";
 import envHandler from "../helpers/envHandler.js";
-import { jwtVerifyPromisified } from "../helpers/jwtFuncs.js";
+import { jwtVerifyPromisified } from "../helpers/jwtFuncts.js";
 import { User } from "../models/user.js";
 
 const requireUser = catchAsync(async (req, res, next) => {
