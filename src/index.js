@@ -3,8 +3,7 @@ import envHandler from "./helpers/envHandler.js";
 import connectToDB from "./initializers/db.js";
 import expressMongoSanitize from "express-mongo-sanitize";
 import cors from "cors";
-import doctorRouter from "./routes/doctor.js";
-import patientRouter from "./routes/patient.js";
+import userRouter from "./routes/user.js";
 
 const app = express();
 const port = envHandler('PORT');
@@ -13,8 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(expressMongoSanitize());
 
-app.use("/api/doctor", doctorRouter);
-app.use("/api/patient", patientRouter);
+app.use("/api/user", userRouter);
 
 connectToDB();
 

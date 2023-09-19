@@ -1,9 +1,9 @@
 import catchAsync from "../helpers/catchAsync.js";
 import envHandler from "../helpers/envHandler.js";
 import { jwtVerifyPromisified } from "../helpers/jwtFuncs.js";
-import { Patient } from "../models/patient.js";
+import { User } from "../models/user.js";
 
-const requirePatient = catchAsync(async (req, res, next) => {
+const requireUser = catchAsync(async (req, res, next) => {
   let authorizationHeader = req.headers.authorization;
   let token;
   if (authorizationHeader && authorizationHeader.startsWith("Bearer"))
@@ -17,12 +17,11 @@ const requirePatient = catchAsync(async (req, res, next) => {
 
   try {
     const decoded = await jwtVerifyPromisified(token, envHandler("JWTSecret"));
-    // check if patient exists
-    const patient = await Patient.findById(decoded.id);
-    if (!patient) {
-      return res.status(400).json({ message: "Doctor not found" });
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(400).json({ message: "user not found" });
     }
-    req.patient = patient;
+    req.user = user;
     next();
   } catch (err) {
     return res.status(400).json({
@@ -31,4 +30,4 @@ const requirePatient = catchAsync(async (req, res, next) => {
   }
 });
 
-export default requirePatient;
+export default requireUser;
