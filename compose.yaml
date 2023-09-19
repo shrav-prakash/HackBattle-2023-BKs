@@ -1,0 +1,24 @@
+services:
+  app:
+    image: healthify-backend
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - mongodb
+    volumes:
+      - log-data:/app/logs
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
+    name: healthify-data
+    driver: local
+  log-data:
+    name: log-data
+    driver: local
