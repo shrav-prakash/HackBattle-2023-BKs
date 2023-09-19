@@ -22,15 +22,57 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  pickupRating: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 5,
+  },
+  completedPickups: {
+    type: [
+      {
+        pickup: {
+          type: Schema.Types.ObjectId,
+          ref: "Pickup",
+        },
+        scheduler: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
+  },
+  currentPickups: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Pickup",
+    },
+  ],
+  scheduledPickups: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Pickup",
+    },
+  ],
+  requestRating: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 5,
+  },
+  money: {
+    type: Number,
+    default: 100,
+  },
 });
 
 // compare passwords
-patientSchema.methods.comparePassword = async function (password) {
+userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
 // hash password before saving
-patientSchema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
@@ -39,7 +81,7 @@ patientSchema.pre("save", async function (next) {
 });
 
 //omit password when returning
-patientSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
   return obj;
