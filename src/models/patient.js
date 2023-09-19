@@ -1,10 +1,15 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const patientSchema = new Schema({
   name: {
     type: String,
     required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -29,12 +34,21 @@ const patientSchema = new Schema({
   consultation: [
     {
       symptom: {
-        type: [String],
+        type: String,
+        required: true,
+      },
+      aiDiagnosis: {
+        type: String,
         required: true,
       },
       doctor: { type: Schema.Types.ObjectId, required: false },
+      anonymous: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
     },
   ],
 });
 
-module.exports = mongoose.model("patient", patientSchema);
+export const Patient = mongoose.model("Patient", patientSchema);
