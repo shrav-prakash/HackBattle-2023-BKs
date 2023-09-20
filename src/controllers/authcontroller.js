@@ -9,6 +9,13 @@ export const register = catchAsync(async (req, res, next) => {
   if (await User.findOne({ email: email })) {
     return res.status(400).json({ message: "Email already exists" });
   }
+  // check if regno already exists
+  if (await User.findOne({ regno: regno })) {
+    return res
+      .status(400)
+      .json({ message: "Registration number already exists" });
+  }
+
   const user = new User({
     email,
     name,
@@ -31,7 +38,7 @@ export const register = catchAsync(async (req, res, next) => {
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   // check if email exists
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email: email.toLowerCase() });
   if (!user) {
     return res.status(400).json({ message: "Email not found" });
   }

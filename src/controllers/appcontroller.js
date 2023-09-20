@@ -131,7 +131,7 @@ export const completePickup = async (req, res, next) => {
 };
 
 export const cancelPickup = async (req, res, next) => {
-  const pickupId = req.params.pickupId;
+  const { pickupId } = req.body;
   const pickup = await Pickup.findById(pickupId)
     .populate("deliverer")
     .populate("scheduler");
