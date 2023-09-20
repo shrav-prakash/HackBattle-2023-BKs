@@ -38,7 +38,7 @@ export const register = catchAsync(async (req, res, next) => {
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   // check if email exists
-  const user = await User.findOne({ email: email.toLowerCase() });
+  const user = await User.findOne({ email: email });
   if (!user) {
     return res.status(400).json({ message: "Email not found" });
   }

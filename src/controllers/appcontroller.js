@@ -89,12 +89,22 @@ export const checkPickupStatus = async (req, res, next) => {
     await pickup.populate("deliverer");
     pickup.deliverer = pickup.deliverer.toJSON();
   });
-  return res.status(200).json({ user: req.user.toJSON() });
+  req.user.scheduledPickups = req.user.scheduledPickups.filter(
+    (pickup) => pickup.deliverer
+  );
+  return res
+    .status(200)
+    .json({
+      deliverer:
+        req.user.scheduledPickups.length > 0
+          ? req.user.scheduledPickups.length[0]
+          : [],
+    });
 };
 
 export const getAcceptedPickups = async (req, res, next) => {
-    await req.user.populate("currentPickups");
-    return res.status(200).json({ pickups: req.user.currentPickups });
+  await req.user.populate("currentPickups");
+  return res.status(200).json({ pickups: req.user.currentPickups });
 };
 
 export const completePickup = async (req, res, next) => {
@@ -106,7 +116,7 @@ export const completePickup = async (req, res, next) => {
     return res.status(400).json({ message: "Pickup not found" });
   }
   if (pickup.scheduler._id.toString() != req.user._id.toString()) {
-    console.log(req.user._id, pickup.scheduler._id)
+    console.log(req.user._id, pickup.scheduler._id);
     return res.status(400).json({ message: "Pickup not assigned by you" });
   }
   req.user.scheduledPickups = req.user.scheduledPickups.filter(

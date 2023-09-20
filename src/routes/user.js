@@ -23,7 +23,7 @@ import {
 
 const router = Router();
 
-router.use(handleValidation(authorizationHeaderSchema, "header"), requireUser);
+router.use(requireUser);
 
 router.post(
   "/schedule",

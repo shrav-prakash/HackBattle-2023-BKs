@@ -33,7 +33,7 @@ export const schedulePickupSchema = Joi.object({
   // UTC timestamp
   pickupMaxTime: Joi.number().required(),
   pickupLocationId: Joi.string().required().hex().length(24),
-  deliverLocationId: Joi.string().required().hex().length(24),
+  dropLocationId: Joi.string().required().hex().length(24),
 }).required();
 
 export const acceptPickupSchema = Joi.object({
