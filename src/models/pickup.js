@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { locationSchema } from "./location";
+import { locationSchema } from "./location.js";
 
 const Schema = mongoose.Schema;
 
@@ -12,7 +12,6 @@ const pickupSchema = new Schema({
   deliverer: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true,
     default: null,
   },
   pickupFrom: {

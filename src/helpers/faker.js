@@ -20,7 +20,6 @@ export const generateFakeData = async (count) => {
         completedPickups: [],
         currentPickups: [],
         scheduledPickups: [],
-        requestRating: faker.number.int({ min: 0, max: 5 }),
         availableToPickup: faker.datatype.boolean(),
         phone: faker.phone.number(),
       })

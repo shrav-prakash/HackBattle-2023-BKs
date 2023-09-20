@@ -59,16 +59,10 @@ const userSchema = new Schema({
       ref: "Pickup",
     },
   ],
-  requestRating: {
-    type: Number,
-    default: 0,
-    min: 0,
-    max: 5,
-  },
-  money: {
-    type: Number,
-    default: 100,
-  },
+  // money: {
+  //   type: Number,
+  //   default: 100,
+  // },
   availableToPickup: {
     type: Boolean,
     required: true,
