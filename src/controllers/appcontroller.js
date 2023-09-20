@@ -85,9 +85,9 @@ export const acceptPickup = async (req, res, next) => {
 
 export const checkPickupStatus = async (req, res, next) => {
   await req.user.populate("scheduledPickups");
-  await req.user.scheduledPickups.foreach(async (pickup) => {
+  await req.user.scheduledPickups.forEach(async (pickup) => {
     await pickup.populate("deliverer");
-    pickup.deliverer = pickup.deliverer.toJSON();
+    pickup.deliverer = pickup.deliverer?.toJSON();
   });
   req.user.scheduledPickups = req.user.scheduledPickups.filter(
     (pickup) => pickup.deliverer

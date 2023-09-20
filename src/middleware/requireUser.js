@@ -4,6 +4,7 @@ import { jwtVerifyPromisified } from "../helpers/jwtFuncts.js";
 import { User } from "../models/user.js";
 
 const requireUser = catchAsync(async (req, res, next) => {
+  console.log(req.headers)
   let authorizationHeader = req.headers.authorization;
   let token;
   if (authorizationHeader && authorizationHeader.startsWith("Bearer"))
