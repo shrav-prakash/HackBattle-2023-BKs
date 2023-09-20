@@ -92,6 +92,11 @@ export const checkPickupStatus = async (req, res, next) => {
   return res.status(200).json({ user: req.user.toJSON() });
 };
 
+export const getAcceptedPickups = async (req, res, next) => {
+    await req.user.populate("currentPickups");
+    return res.status(200).json({ pickups: req.user.currentPickups });
+};
+
 export const completePickup = async (req, res, next) => {
   const { pickupId, rating } = req.body;
   const pickup = await Pickup.findById(pickupId)
