@@ -15,7 +15,6 @@ const pickupSchema = new Schema({
     required: true,
     default: null,
   },
-  // sub document location
   pickupFrom: {
     type: locationSchema,
     required: true,
@@ -23,6 +22,16 @@ const pickupSchema = new Schema({
   deliverTo: {
     type: locationSchema,
     required: true,
+  },
+  pickupTime: {
+    scheduled: {
+      type: Date,
+      required: true,
+    },
+    maximum: {
+      type: Date,
+      required: true,
+    },
   },
 });
 

@@ -1,9 +1,10 @@
 import catchAsync from "../helpers/catchAsync.js";
+import envHandler from "../helpers/envHandler.js";
 import { User } from "../models/user.js";
 import jwt from "jsonwebtoken";
 
 export const register = catchAsync(async (req, res, next) => {
-  const { email, name, password, regno } = req.body;
+  const { email, name, password, regno, phone, gender } = req.body;
   // check if email already exists
   if (await User.findOne({ email: email })) {
     return res.status(400).json({ message: "Email already exists" });
@@ -13,6 +14,8 @@ export const register = catchAsync(async (req, res, next) => {
     name,
     password,
     regno,
+    phone,
+    gender,
   });
   await user.save();
   const token = jwt.sign(
@@ -28,7 +31,7 @@ export const register = catchAsync(async (req, res, next) => {
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   // check if email exists
-  const user = User.findOne({ email: email });
+  const user = await User.findOne({ email: email });
   if (!user) {
     return res.status(400).json({ message: "Email not found" });
   }

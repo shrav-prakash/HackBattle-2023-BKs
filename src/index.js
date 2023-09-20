@@ -5,6 +5,7 @@ import expressMongoSanitize from "express-mongo-sanitize";
 import cors from "cors";
 import userRouter from "./routes/user.js";
 import { generateFakeData } from "./helpers/faker.js";
+import authRouter from "./routes/auth.js";
 
 const app = express();
 const port = envHandler("PORT");
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(expressMongoSanitize());
 
 app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
 await connectToDB();
 // await generateFakeData(20);
 

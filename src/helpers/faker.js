@@ -21,6 +21,8 @@ export const generateFakeData = async (count) => {
         currentPickups: [],
         scheduledPickups: [],
         requestRating: faker.number.int({ min: 0, max: 5 }),
+        availableToPickup: faker.datatype.boolean(),
+        phone: faker.phone.number(),
       })
     );
     console.log(users[i].email, users[i].password);
@@ -35,6 +37,8 @@ export const generateFakeData = async (count) => {
       })
     );
   }
-  await User.insertMany(users);
-  await Location.insertMany(locations);
+  for (let i = 0; i < count; i++) {
+    await users[i].save();
+    await locations[i].save();
+  }
 };

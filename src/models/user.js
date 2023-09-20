@@ -69,6 +69,15 @@ const userSchema = new Schema({
     type: Number,
     default: 100,
   },
+  availableToPickup: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  phone: {
+    type: String,
+    required: true,
+  }
 });
 
 // compare passwords
